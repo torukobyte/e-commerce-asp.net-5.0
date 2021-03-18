@@ -1,0 +1,67 @@
+@model ETicaret.Models.Urun
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Düzenle</h1>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control"/>
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <input asp-for="Aciklama" class="form-control" maxlength="20"/>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fiyat" class="control-label"></label>
+                <input asp-for="Fiyat" class="form-control"/>
+                <span asp-validation-for="Fiyat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dosya" class="control-label" for="dosyasec"></label>
+                <input style="color:red;" asp-for="Dosya" class="form-control-file" id="dosyasec" multiple/>
+                <span asp-validation-for="Dosya" class="text-danger"></span>
+                <br>
+
+                <input type="submit" value="Kaydet" class="btn btn-primary"/> |
+                <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model.Resimler)
+    {
+        @if (item.dosyaAdi != null)
+        {
+            <span>
+                <img src="\resimler\@item.dosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/><br>
+                <a asp-action="ResimSil" asp-route-id="@item.id" class="btn btn-danger" style="display:block;width: 100%;border:1px solid black;">Sil</a>
+            </span>
+        }
+
+        else
+        {
+            <div class="form-group">
+                <label asp-for="Dosya" class="control-label" for="dosyasec"></label>
+                <input asp-for="Dosya" class="form-control-file" id="dosyasec" multiple/>
+                <span asp-validation-for="Dosya" class="text-danger"></span>
+            </div>
+        }
+    }
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

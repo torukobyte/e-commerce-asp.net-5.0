@@ -1,0 +1,44 @@
+@model ETicaret.Models.Urun
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Ürün</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <input asp-for="Aciklama" class="form-control" maxlength="20" />
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fiyat" class="control-label"></label>
+                <input asp-for="Fiyat" class="form-control" />
+                <span asp-validation-for="Fiyat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dosya" class="control-label" for="dosyasec"></label>
+                <input asp-for="Dosya" style="color: red" class="form-control-file" id="dosyasec" multiple/>
+                <span asp-validation-for="Dosya" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" /> |
+                <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

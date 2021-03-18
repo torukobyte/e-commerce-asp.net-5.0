@@ -1,0 +1,106 @@
+@model Kategori
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4 class="mb-4">Silmek istediğinizden emin misiniz?</h4>
+<div class="alert alert-danger row align-items-center" role="alert">
+    <h2>
+        <i class="fas fa-exclamation-circle"> </i>
+    </h2>
+    &nbsp;
+    &nbsp;
+    <h5>
+        <span class="text-danger" style="font-weight: bold;font-family: Gotham;">@Model.Adi </span>Kategorisi Siliniyor
+    </h5>
+</div>
+<hr/>
+<div>
+    <br/>
+    <form asp-action="Delete">
+        <div class="custom-control custom-switch" style="font-weight: bold;">
+            <input type="checkbox" class="custom-control-input" id="customCheck1" name="deleteItems">
+            <label class="custom-control-label text-primary" for="customCheck1">
+                <span style="font-family: Ubuntu,serif;">
+                    <span class="text-danger" style="font-weight: bold">@Model.Adi</span> içindeki
+                    <span class="text-danger" style="font-weight: bold">@Model.Urunleri.Count</span> adet ürün de silinsin
+                </span>
+            </label>
+        </div>
+        <br><hr>
+
+        <div style="font-family: Ubuntu,serif;">
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Ürünleri Göster
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample" style="font-weight: bold;">
+                <div class="card card-body" style="border-radius: 10px
+                ;">
+                    <ul>
+                        @foreach (var i in Model.Urunleri)
+                        {
+                            <li>@i.Ad</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
+        <input type="hidden" asp-for="Id"/>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            Sil
+        </button> |
+
+        <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <i class="fas fa-exclamation-circle text-danger p-1">
+                                <span style="font-family: Ubuntu,serif;"> Dikkat!</span>
+                            </i>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="text-danger" style="font-family: Ubuntu,serif;font-weight: bold;">@Model.Adi</span>
+                        <span style="font-family: Ubuntu,serif;">
+                            kategorisini
+                            <span id="show" style="font-family: Ubuntu,serif;display: none;">
+                                ve içerisindeki
+                                <span class="text-danger" style="font-weight: bold;">@Model.Urunleri.Count</span>
+                                ürünü
+                            </span>
+                            silmek istediğinize emin misiniz?
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#customCheck1').on('click',function(){
+                if(this.checked){
+                    $('#show').show();
+                }else{
+                    $('#show').hide();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,73 @@
+﻿@using ETicaret.Data
+@model Urun
+@inject ETicaretContext _context
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+@* <span class="text-danger font-weight-bold">@Model.Ad</span> Ürününün Kategorileri *@
+@* *@
+@* <br><br> *@
+@* <ul> *@
+@*     @foreach (var i in Model.KategoriUrunler.Select(x => x.Kategori)) *@
+@*     { *@
+@*         @if (i != null) *@
+@*         { *@
+@*             <li>@i.Adi</li> *@
+@*         } *@
+@*     } *@
+@* *@
+@* </ul> *@
+<hr/>
+<div class="jumbotron">
+    <span class="text-danger font-weight-bold">@Model.Ad</span> Ürününün Kategorilerini Seçiniz
+    @* <span class="text-danger font-weight-bold">Tüm Kategoriler</span> *@
+    <hr>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="select_all">
+        <label class="custom-control-label" for="select_all">Hepsini Seç</label>
+    </div>
+    <form asp-action="KategorileriniAyarla" class="mt-4 ml-3">
+        @foreach (var item in _context.Kategoriler)
+        {
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input checkbox" id="cb_@item.Id"
+                       name="SeciliCheckBoxlar"
+                       value="@item.Id"
+                       @(Model.Kategorileri.Contains(item) ? "checked" : "")>
+                <label class="custom-control-label" for="cb_@item.Id">@item.Adi</label>
+            </div>
+        }
+        <button type="submit" class="btn btn-primary mt-3" name="btnKaydet" value="Kaydet">Kaydet</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#select_all').on('click',function(){
+                if(this.checked){
+                    $('.checkbox').each(function(){
+                        this.checked = true;
+                    });
+                }else{
+                    $('.checkbox').each(function(){
+                        this.checked = false;
+                    });
+                }
+            });
+            
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length === $('.checkbox').length){
+                    $('#select_all').prop('checked',true);
+                }else{
+                    $('#select_all').prop('checked',false);
+                }
+            });
+            if($('.checkbox:checked').length === $('.checkbox').length){
+                $('#select_all').prop('checked',true);
+             }else{
+                $('#select_all').prop('checked',false);
+                            }
+        });
+    </script>
+}

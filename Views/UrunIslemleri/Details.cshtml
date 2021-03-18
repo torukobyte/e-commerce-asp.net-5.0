@@ -1,0 +1,47 @@
+@model ETicaret.Models.Urun
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detaylar</h1>
+<hr />
+<div class="col-4">
+    <div>
+        <dl class="row">
+            <dt class = "col-sm-5" style="color: darkred">
+                @Html.DisplayNameFor(model => model.Ad)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Ad)
+            </dd>
+            <dt class = "col-sm-5" style="color: darkred">
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Aciklama)
+            </dd>
+            <dt class = "col-sm-5" style="color: darkred">
+                @Html.DisplayNameFor(model => model.Fiyat)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Fiyat)
+            </dd>
+        </dl>
+    </div>
+
+
+
+</div>
+<div class="col-12">
+    @foreach (var item in Model.Resimler)
+    {
+        <img src="\resimler\@item.dosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/>  
+    }
+    
+</div>
+<br>
+<div>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
+</div>

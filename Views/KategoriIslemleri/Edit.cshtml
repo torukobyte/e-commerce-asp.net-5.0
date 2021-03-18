@@ -1,0 +1,34 @@
+@model Kategori
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Düzenle</h1>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="Adi" class="control-label"></label>
+                <input asp-for="Adi" class="form-control"/>
+                <span asp-validation-for="Adi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <input asp-for="Aciklama" class="form-control" maxlength="20"/>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+        <br>
+
+                <input type="submit" value="Kaydet" class="btn btn-primary"/> |
+                <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

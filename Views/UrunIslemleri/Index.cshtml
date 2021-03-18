@@ -1,0 +1,132 @@
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<ETicaret.Models.Urun>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ürün İşlemleri</h1>
+@{
+    var kategori = ViewBag.kategori as Kategori;
+}
+
+<h6 style="color:#bb0000 ">@(kategori?.Adi ?? "Tüm Kategoriler")</h6>
+<br>
+
+<p>
+    <a class="btn btn-primary btn-lg btn-block" asp-action="Create" asp-route-id="@kategori?.Id">
+        <svg id="qw" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"/>
+        </svg>
+        Ürün Ekle
+    </a>
+</p>
+<table class="table">
+    <thead>
+    <style>
+    .zoom {
+      transition: transform .2s;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10%;
+    }
+    
+    .zoom:hover {
+      transform: scale(1.7);
+    }
+    
+    svg {
+    font-size: 20px;
+    margin-top: -4px;
+    }
+    
+    #qw{
+    font-size: 25px;
+    margin-top: -10px;
+    margin-right: 3px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Resimler)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.Resimler.FirstOrDefault()?.dosyaAdi != null)
+                {
+                    <div class="zoom">
+                        <img src="\resimler\@item.Resimler.FirstOrDefault()?.dosyaAdi" style="max-height: 100px;max-width: 90px;border: 1px solid black;padding-bottom: 0;"/>
+                    </div>
+                    <br/>
+                }
+                else
+                {
+                    <div class="zoom">
+                        <img src="\resimler\noimg.png" style="max-height: 90px;max-width: 100px;border: 1px solid black;"/>
+                    </div>
+                    <br/>
+                    TempData["mesaj"] = "Bazı Ürünlerin Resimleri Eksik!";
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fiyat)
+            </td>
+            <td>
+                <a class="btn btn-dark" asp-action="Edit" asp-route-id="@item.Id">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                    Düzenle
+                </a> |
+                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    Detay
+                </a> |
+                @if (Context.Session.GetString("isAdmin") == "admin")
+                {
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                        </svg>
+                        Sil
+                    </a> <span>|</span>
+                }
+                <a class="btn btn-success" asp-action="KategorileriniAyarla" asp-route-id="@item.Id">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-border-width" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-2zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    Kategorileri
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
