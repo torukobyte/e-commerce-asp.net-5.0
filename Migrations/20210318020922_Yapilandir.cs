@@ -28,6 +28,7 @@ namespace ETicaret.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     username = table.Column<string>(type: "TEXT", nullable: false),
                     password = table.Column<string>(type: "TEXT", nullable: false),
+                    cPassword = table.Column<string>(type: "TEXT", nullable: false),
                     isAdmin = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

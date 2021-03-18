@@ -22,6 +22,11 @@
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="cPassword" class="control-label"></label>
+                <input asp-for="cPassword" class="form-control" maxlength="20"/>
+                <span asp-validation-for="cPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Kayıt Ol" class="btn btn-primary"/>
             </div>
         </form>

@@ -216,7 +216,8 @@ namespace ETicaret.Data
                 new Kullanici
                 {
                     username = "burak",
-                    password = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("a1b2c3123"))),
+                    password = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("123"))),
+                    cPassword = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("123"))),
                     isAdmin = "admin"
                 }
             );
