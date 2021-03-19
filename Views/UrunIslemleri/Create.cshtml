@@ -5,24 +5,24 @@
 }
 
 <h4>Ürün</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create"  enctype="multipart/form-data">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ad" class="control-label"></label>
-                <input asp-for="Ad" class="form-control" />
+                <input asp-for="Ad" class="form-control"/>
                 <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Aciklama" class="control-label"></label>
-                <input asp-for="Aciklama" class="form-control" maxlength="20" />
+                <input asp-for="Aciklama" class="form-control" maxlength="20"/>
                 <span asp-validation-for="Aciklama" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Fiyat" class="control-label"></label>
-                <input asp-for="Fiyat" class="form-control" />
+                <input asp-for="Fiyat" class="form-control"/>
                 <span asp-validation-for="Fiyat" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -31,7 +31,7 @@
                 <span asp-validation-for="Dosya" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Oluştur" class="btn btn-primary" /> |
+                <input type="submit" value="Oluştur" class="btn btn-primary"/> |
                 <a class="btn btn-success" asp-action="Index">Geri Dön!</a>
             </div>
         </form>
@@ -40,5 +40,5 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

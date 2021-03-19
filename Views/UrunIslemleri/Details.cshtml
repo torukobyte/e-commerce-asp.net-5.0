@@ -5,40 +5,39 @@
 }
 
 <h1>Detaylar</h1>
-<hr />
+<hr/>
 <div class="col-4">
     <div>
         <dl class="row">
-            <dt class = "col-sm-5" style="color: darkred">
+            <dt class="col-sm-5" style="color: darkred">
                 @Html.DisplayNameFor(model => model.Ad)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Ad)
             </dd>
-            <dt class = "col-sm-5" style="color: darkred">
+            <dt class="col-sm-5" style="color: darkred">
                 @Html.DisplayNameFor(model => model.Aciklama)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Aciklama)
             </dd>
-            <dt class = "col-sm-5" style="color: darkred">
+            <dt class="col-sm-5" style="color: darkred">
                 @Html.DisplayNameFor(model => model.Fiyat)
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Fiyat)
             </dd>
         </dl>
     </div>
 
 
-
 </div>
 <div class="col-12">
     @foreach (var item in Model.Resimler)
     {
-        <img src="\resimler\@item.dosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/>  
+        <img src="\resimler\@item.dosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/>
     }
-    
+
 </div>
 <br>
 <div>

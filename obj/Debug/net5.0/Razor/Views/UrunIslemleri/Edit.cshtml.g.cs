@@ -27,7 +27,7 @@ using ETicaret.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6815ca463c442804afadc3e15c91fb49f784b836", @"/Views/UrunIslemleri/Edit.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"122906d037701dbdec640b6ace2ab30b1ed226d0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"95d6dc81a52d80a3d77b9340cd03dfccd65d85ea", @"/Views/_ViewImports.cshtml")]
     public class Views_UrunIslemleri_Edit : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ETicaret.Models.Urun>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

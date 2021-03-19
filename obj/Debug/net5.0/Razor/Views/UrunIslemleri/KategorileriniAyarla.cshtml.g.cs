@@ -34,7 +34,7 @@ using ETicaret.Data;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"57cabc0058273862bbca5c1af46abdb615efb1a8", @"/Views/UrunIslemleri/KategorileriniAyarla.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"122906d037701dbdec640b6ace2ab30b1ed226d0", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"95d6dc81a52d80a3d77b9340cd03dfccd65d85ea", @"/Views/_ViewImports.cshtml")]
     public class Views_UrunIslemleri_KategorileriniAyarla : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Urun>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "KategorileriniAyarla", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

@@ -37,17 +37,17 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 @if (Context.Session.GetString("username") != null)
                 {
-                    <a class="nav-link text-warning collapse navbar-collapse d-flex flex-row-reverse" asp-action="Detay" asp-controller="KullaniciIslemleri"><i style="margin-left: 3px;margin-top: 2px;" class="fas fa-user"></i>@Context.Session.GetString("username")</a>
+                    <a class="nav-link text-warning collapse navbar-collapse d-flex flex-row-reverse" asp-action="Detay" asp-controller="KullaniciIslemleri">
+                        <i style="margin-left: 3px;margin-top: 2px;" class="fas fa-user"></i>@Context.Session.GetString("username")
+                    </a>
 
                     <a class="nav-link text-light collapse navbar-collapse d-flex flex-row-reverse" asp-action="Cikis" asp-controller="KullaniciIslemleri"><i style="margin-left: 3px;margin-top: 2px;" class="fas fa-sign-out-alt"></i>Çıkış</a>
-
                 }
                 else
                 {
                     <a class="nav-link text-light collapse navbar-collapse d-flex flex-row-reverse" asp-action="Kayit" asp-controller="KullaniciIslemleri"><i style="margin-left: 3px;margin-top: 2px;" class="fas fa-user"></i>Kayıt</a>
 
                     <a class="nav-link text-light collapse navbar-collapse d-flex flex-row-reverse" asp-action="Giris" asp-controller="KullaniciIslemleri"><i style="margin-left: 3px;margin-top: 2px;" class="fas fa-sign-in-alt"></i>Giriş</a>
-
                 }
                 <form class="flex-column" style="margin: auto;width: 100%">
                     <a class="btn btn-info" asp-controller="Home" asp-action="Index">
@@ -72,7 +72,7 @@
                             Kategori Islemleri
                         </a>
                     }
-                    
+
                 </form>
 
 
@@ -104,6 +104,6 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-@RenderSection("Scripts", required: false)
+@RenderSection("Scripts", false)
 </body>
 </html>

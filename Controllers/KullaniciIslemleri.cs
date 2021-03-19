@@ -89,7 +89,6 @@ namespace ETicaret.Controllers
                 kullanici.isAdmin = "user";
                 kullanici.username = kullanici.username.ToLower();
 
-
                 // char.ToUpper(kullanici.username[0]) + kullanici.username.Substring(1); //capitalized
 
                 var kullaniciKayitliMi = await _context.Kullanicilar.Where(x => x.username == kullanici.username)
@@ -105,6 +104,7 @@ namespace ETicaret.Controllers
 
                         return RedirectToAction("Giris", "KullaniciIslemleri");
                     }
+
                     TempData["Mesaj"] = "Girdiğiniz şifreler eşleşmiyor lütfen tekrar deneyiniz!";
                 }
                 else

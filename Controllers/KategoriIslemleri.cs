@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ETicaret.Data;
 using ETicaret.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.Controllers
 {
@@ -16,7 +16,7 @@ namespace ETicaret.Controllers
         {
             _context = context;
         }
-        
+
 
         // GET: KategoriIslemleri
         public async Task<IActionResult> Index()
@@ -27,17 +27,11 @@ namespace ETicaret.Controllers
         // GET: KategoriIslemleri/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var kategori = await _context.Kategoriler
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (kategori == null)
-            {
-                return NotFound();
-            }
+            if (kategori == null) return NotFound();
 
             return View(kategori);
         }
@@ -66,16 +60,10 @@ namespace ETicaret.Controllers
         // GET: KategoriIslemleri/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var kategori = await _context.Kategoriler.FindAsync(id);
-            if (kategori == null)
-            {
-                return NotFound();
-            }
+            if (kategori == null) return NotFound();
 
             return View(kategori);
         }
@@ -85,10 +73,7 @@ namespace ETicaret.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Adi,Aciklama")] Kategori kategori)
         {
-            if (id != kategori.Id)
-            {
-                return NotFound();
-            }
+            if (id != kategori.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -99,10 +84,7 @@ namespace ETicaret.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KategoriExists(kategori.Id))
-                    {
-                        return NotFound();
-                    }
+                    if (!KategoriExists(kategori.Id)) return NotFound();
 
                     throw;
                 }
@@ -116,24 +98,19 @@ namespace ETicaret.Controllers
         // GET: KategoriIslemleri/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var kategori = await _context.Kategoriler
                 .Include(x => x.Urunleri)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (kategori == null)
-            {
-                return NotFound();
-            }
+            if (kategori == null) return NotFound();
 
             return View(kategori);
         }
 
         // POST: KategoriIslemleri/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id, IFormCollection elemanlar)
         {
@@ -145,25 +122,24 @@ namespace ETicaret.Controllers
                     .FirstOrDefaultAsync(m => m.Id == id);
 
                 var urunlerSilinsin = elemanlar["deleteItems"] == "on";
-            
-                if(urunlerSilinsin) _context.RemoveRange(kategori.Urunleri);
-            
+
+                if (urunlerSilinsin) _context.RemoveRange(kategori.Urunleri);
+
                 _context.RemoveRange(kategori.KategoriUrunler);
 
                 _context.Kategoriler.Remove(kategori);
                 await _context.SaveChangesAsync();
 
                 var urunMesaj = urunlerSilinsin ? "ve içerisindeki " + kategori.Urunleri.Count + " adet ürün " : "";
-            
+
                 TempData["Mesaj"] = $"{kategori.Adi} kategorisi {urunMesaj} başarıyla silindi!";
                 return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                TempData["Mesaj"] = "Erişim reddedildi!";
-                return RedirectToAction("Index","Home");
-            }
+
+            TempData["Mesaj"] = "Erişim reddedildi!";
+            return RedirectToAction("Index", "Home");
         }
+
         private bool KategoriExists(int id)
         {
             return _context.Kategoriler.Any(e => e.Id == id);

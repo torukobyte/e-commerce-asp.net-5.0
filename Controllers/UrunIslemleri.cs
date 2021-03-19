@@ -101,6 +101,7 @@ namespace ETicaret.Controllers
         {
             return View();
         }
+
         // POST: UrunIslemleri/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -112,23 +113,29 @@ namespace ETicaret.Controllers
                 {
                     foreach (var item in urun.Dosya)
                     {
-                        var tamDosyaAdi = Path.Combine(_dosyaYolu, item.FileName);
+                        string guid = Guid.NewGuid().ToString();
+                        var split = item.FileName.Split(".");
+                        var fileName = split[0] + guid + "." + split[1]; //split[0] noktadan öncesi guid . ve noktadan sonrası
+                        
+                        var tamDosyaAdi = Path.Combine(_dosyaYolu, fileName);
                         await using (var dosyaAkisi = new FileStream(tamDosyaAdi, FileMode.Create))
                         {
                             await item.CopyToAsync(dosyaAkisi);
                         }
-                        urun.Resimler.Add(new Resim { dosyaAdi = item.FileName });
+
+                        urun.Resimler.Add(new Resim {dosyaAdi = fileName});
                     }
                 }
                 catch (NullReferenceException)
                 {
                 }
-                if (id != null) urun.KategoriUrunler.Add(new KategoriUrun { KategoriId = (int)id });
+
+                if (id != null) urun.KategoriUrunler.Add(new KategoriUrun {KategoriId = (int) id});
                 // if (id != null) urun.Kategorileri.Add(await _context.Kategoriler.FindAsync(id = id));
                 _context.Add(urun);
                 await _context.SaveChangesAsync();
                 urun.Ad = char.ToUpper(urun.Ad[0]) + urun.Ad.Remove(0, 1);
-                if (id != null) return RedirectToAction(nameof(KategorininUrunleri), new { id });
+                if (id != null) return RedirectToAction(nameof(KategorininUrunleri), new {id});
                 try
                 {
                     TempData["mesaj"] = urun.Ad + " ürünü Başarıyla Eklendi!";
@@ -138,10 +145,13 @@ namespace ETicaret.Controllers
                     TempData["mesaj"] = urun.Ad + " ürünü Oluşturulurken bir HATA oluştu!";
                     throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(urun);
         }
+
         // GET: UrunIslemleri/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -169,14 +179,18 @@ namespace ETicaret.Controllers
                 {
                     foreach (var item in urun.Dosya)
                     {
-                        var tamDosyaAdi = Path.Combine(dosyaYolu, item.FileName);
+                        string guid = Guid.NewGuid().ToString();
+                        var split = item.FileName.Split(".");
+                        var fileName = split[0] + guid + "." + split[1];
+                        
+                        var tamDosyaAdi = Path.Combine(dosyaYolu, fileName);
 
                         await using (var dosyaAkisi = new FileStream(tamDosyaAdi, FileMode.Create))
                         {
                             await item.CopyToAsync(dosyaAkisi);
                         }
 
-                        urun.Resimler.Add(new Resim { dosyaAdi = item.FileName });
+                        urun.Resimler.Add(new Resim {dosyaAdi = fileName});
                     }
                 }
                 catch (NullReferenceException)
@@ -241,6 +255,7 @@ namespace ETicaret.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
         public async Task<IActionResult> ResimSil(int id)
         {
             var resim = await _context.Resimler.FindAsync(id);
@@ -248,7 +263,7 @@ namespace ETicaret.Controllers
             await _context.SaveChangesAsync();
             System.IO.File.Delete(Path.Combine(_dosyaYolu, resim.dosyaAdi));
 
-            return RedirectToAction(nameof(Edit), new { id = resim.UrunuId });
+            return RedirectToAction(nameof(Edit), new {id = resim.UrunuId});
         }
 
         private bool UrunExists(int id)
