@@ -53,10 +53,6 @@ namespace ETicaret.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("cPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("isAdmin")
                         .HasColumnType("TEXT");
 

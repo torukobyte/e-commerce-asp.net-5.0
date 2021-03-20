@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Migrations
 {
     [DbContext(typeof(ETicaretContext))]
-    [Migration("20210318020922_Yapilandir")]
+    [Migration("20210320091808_Yapilandir")]
     partial class Yapilandir
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,10 +54,6 @@ namespace ETicaret.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("cPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("isAdmin")
                         .HasColumnType("TEXT");

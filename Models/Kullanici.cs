@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 // ReSharper disable InconsistentNaming
 
@@ -18,10 +19,11 @@ namespace ETicaret.Models
         public string password { get; set; }
 
         [Display(Name = "Şifre Onay:")]
-        [Required(ErrorMessage = "Şifre Onay alanı boş bırakılamaz!")]
         [DataType(DataType.Password)]
+        [Compare("password", ErrorMessage = "Şireler Uyuşmuyor!")]
+        [NotMapped]
         public string cPassword { get; set; }
 
-        public string isAdmin { get; set; }
+        public string isAdmin { get; set; } = "guest"; //guest -> if isAdmin not specified
     }
 }

@@ -76,8 +76,7 @@ namespace ETicaret.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Kayit([Bind("Id,username,password,cPassword,isAdmin")]
-            Kullanici kullanici)
+        public async Task<IActionResult> Kayit(Kullanici kullanici)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +85,6 @@ namespace ETicaret.Controllers
                     Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.password)));
                 kullanici.cPassword =
                     Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.cPassword)));
-                kullanici.isAdmin = "user";
                 kullanici.username = kullanici.username.ToLower();
 
                 // char.ToUpper(kullanici.username[0]) + kullanici.username.Substring(1); //capitalized
@@ -96,21 +94,14 @@ namespace ETicaret.Controllers
 
                 if (kullaniciKayitliMi == null)
                 {
-                    if (kullanici.password == kullanici.cPassword)
-                    {
-                        _context.Add(kullanici);
-                        await _context.SaveChangesAsync();
-                        TempData["Mesaj"] = kullanici.username + " aramıza hoşgeldin (:";
+                    _context.Add(kullanici);
+                    await _context.SaveChangesAsync();
+                    TempData["Mesaj"] = kullanici.username + " aramıza hoşgeldin (:";
 
-                        return RedirectToAction("Giris", "KullaniciIslemleri");
-                    }
+                    return RedirectToAction("Giris", "KullaniciIslemleri");
+                }
 
-                    TempData["Mesaj"] = "Girdiğiniz şifreler eşleşmiyor lütfen tekrar deneyiniz!";
-                }
-                else
-                {
-                    TempData["Mesaj"] = "Kullanıcı adı alınmış.. Başka bir kullanıcı adı seçiniz!";
-                }
+                TempData["Mesaj"] = "Kullanıcı adı alınmış.. Başka bir kullanıcı adı seçiniz!";
             }
 
             return View(kullanici);
