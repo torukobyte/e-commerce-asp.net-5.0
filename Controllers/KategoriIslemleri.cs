@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ETicaret.Data;
 using ETicaret.Models;
@@ -25,7 +26,7 @@ namespace ETicaret.Controllers
         }
 
         // GET: KategoriIslemleri/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -58,7 +59,7 @@ namespace ETicaret.Controllers
         }
 
         // GET: KategoriIslemleri/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -71,7 +72,7 @@ namespace ETicaret.Controllers
         // POST: KategoriIslemleri/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Adi,Aciklama")] Kategori kategori)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Adi,Aciklama")] Kategori kategori)
         {
             if (id != kategori.Id) return NotFound();
 
@@ -96,7 +97,7 @@ namespace ETicaret.Controllers
         }
 
         // GET: KategoriIslemleri/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -112,7 +113,7 @@ namespace ETicaret.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id, IFormCollection elemanlar)
+        public async Task<IActionResult> DeleteConfirmed(Guid id, IFormCollection elemanlar)
         {
             if (HttpContext.Session.GetString("isAdmin") == "admin")
             {
@@ -140,7 +141,7 @@ namespace ETicaret.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private bool KategoriExists(int id)
+        private bool KategoriExists(Guid id)
         {
             return _context.Kategoriler.Any(e => e.Id == id);
         }

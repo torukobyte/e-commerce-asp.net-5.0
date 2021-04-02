@@ -1,0 +1,33 @@
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
+namespace ETicaret.Data
+{
+    public class EmailSender : IEmailSender
+    {
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress("torukobyte.eticaret@gmail.com","Yönetim",System.Text.Encoding.UTF8),
+                Subject = subject,
+                Body = htmlMessage,
+                IsBodyHtml = true
+            };
+            mail.To.Add(email);
+            SmtpClient smp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("torukobyte.eticaret@gmail.com", "17.3.999+2/5-qxw28012.992"),
+                Port = 587,
+                EnableSsl = true
+            };
+            smp.Send(mail);
+            
+            return Task.CompletedTask;
+        }
+    }
+}

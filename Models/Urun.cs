@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +13,7 @@ namespace ETicaret.Models
             Resimler = new List<Resim>();
         }
 
-        [Key] public int Id { get; set; }
+        [Key] public Guid Id { get; set; }
 
         [StringLength(20, ErrorMessage = "{0} Alanı 10 karakterden uzun olamaz!")]
         [Required(ErrorMessage = "{0} Alanı Boş Bırakılamaz!")]

@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@if (Context.Session.GetString("username") != null)
+{
+    <div class="card" style="width:500px;text-align: center;">
+        @if (@Context.Session.GetString("isAdmin") == "admin")
+        {
+            <img class="card-img-top" src="https://i.pinimg.com/originals/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" alt="Card image">
+        }
+        else
+        {
+            <img class="card-img-top" src="https://i.ibb.co/rM59Pf0/photo-1511367461989-f85a21fda167.jpg" alt="Card image">
+        }
+        <div class="card-body bg-dark text-light">
+        <h3 class="card-title text-warning">@Context.Session.GetString("username")</h3>
+            <p class="card-text small">Kullanıcı Yetkisi: <span class="text-warning">@Context.Session.GetString("isAdmin")</span></p>
+        </div>
+    </div>
+}

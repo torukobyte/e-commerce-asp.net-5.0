@@ -31,8 +31,14 @@ namespace ETicaret.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Giris(Kullanici kullanici)
         {
+            var salt = "17.3.999+2/5-qxw28012.992";
             SHA256 sha = new SHA256CryptoServiceProvider();
-            kullanici.password = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.password)));
+            var pwEncrypt =
+                Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.password)));
+            var saltEncrypt = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(salt)));
+
+            kullanici.password =
+                Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(pwEncrypt + saltEncrypt)));
 
             kullanici.username = kullanici.username.ToLower();
             var girisYapanKullanici = await _context.Kullanicilar
@@ -64,8 +70,7 @@ namespace ETicaret.Controllers
         [HttpGet]
         public IActionResult Detay()
         {
-            TempData["Mesaj"] = "Bu Sayfa Yapım Aşamasında!";
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         [HttpGet]
@@ -80,11 +85,17 @@ namespace ETicaret.Controllers
         {
             if (ModelState.IsValid)
             {
+                var salt = "17.3.999+2/5-qxw28012.992";
                 SHA256 sha = new SHA256CryptoServiceProvider();
-                kullanici.password =
+                var pwEncrypt =
                     Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.password)));
-                kullanici.cPassword =
-                    Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.cPassword)));
+                var saltEncrypt = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(salt)));
+                
+                kullanici.password =
+                    Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(pwEncrypt + saltEncrypt)));
+
+                // kullanici.password =
+                //     Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(kullanici.password)));
                 kullanici.username = kullanici.username.ToLower();
 
                 // char.ToUpper(kullanici.username[0]) + kullanici.username.Substring(1); //capitalized
@@ -100,10 +111,8 @@ namespace ETicaret.Controllers
 
                     return RedirectToAction("Giris", "KullaniciIslemleri");
                 }
-
                 TempData["Mesaj"] = "Kullanıcı adı alınmış.. Başka bir kullanıcı adı seçiniz!";
             }
-
             return View(kullanici);
         }
     }

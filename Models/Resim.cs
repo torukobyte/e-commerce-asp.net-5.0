@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ETicaret.Models
 {
     public class Resim
     {
-        public int id { get; set; }
+        public Guid id { get; set; }
 
         public string dosyaAdi { get; set; }
 

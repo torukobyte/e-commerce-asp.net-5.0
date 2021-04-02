@@ -1,9 +1,11 @@
 using ETicaret.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaret.Data
 {
-    public class ETicaretContext : DbContext
+    public class ETicaretContext : IdentityDbContext<IdentityUser>
     {
         public ETicaretContext(DbContextOptions<ETicaretContext> options)
             : base(options)
@@ -11,12 +13,7 @@ namespace ETicaret.Data
         }
 
         // c#: Urunler listesi    -----migrations, savechanges-----> sqlite:Urunler tablosuna 
-        public DbSet<Urun>
-            Urunler
-        {
-            get;
-            set;
-        } //_context.Urunler.Add(new Urun());   _context.Urunler.Remove(x);  _context.Urunler.Where(x=>x.)
+        public DbSet<Urun> Urunler { get; set; } //_context.Urunler.Add(new Urun());   _context.Urunler.Remove(x);  _context.Urunler.Where(x=>x.)
 
         // c#: Resimler listesi    -----migrations, savechanges-----> sqlite:Resimler tablosuna 
         public DbSet<Resim> Resimler { get; set; }
@@ -28,9 +25,10 @@ namespace ETicaret.Data
 
         public DbSet<Kullanici> Kullanicilar { get; set; }
 
-        //FluentAPI
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Urun>()
                 //     Urun  <---N------------------------N---> Kategori
                 .HasMany(x => x.Kategorileri)

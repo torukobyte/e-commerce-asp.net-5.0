@@ -12,7 +12,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AControllers_002Ff_003AUrunIslemleri_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AModels_002Ff_003AErrorViewModel_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AModels_002Ff_003AUrun_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AShared_002Ff_003A_005FLayout_002Ecshtml/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AShared_002Ff_003A_005FLayout_002Ecshtml/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AUrunIslemleri_002Ff_003ACreate_002Ecshtml/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AUrunIslemleri_002Ff_003ADelete_002Ecshtml/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AUrunIslemleri_002Ff_003ADetails_002Ecshtml/@EntryIndexedValue">ForceIncluded</s:String>
@@ -20,6 +20,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Fd_003AViews_002Fd_003AUrunIslemleri_002Ff_003AIndex_002Ecshtml/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Ff_003AProgram_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=93C2FD55_002D277B_002DD106_002D422C_002DEC1F9F631A57_002Ff_003AStartup_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">C:\Program Files\dotnet\dotnet.exe</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/MonoExePath/@EntryValue">C:\Program Files\dotnet\dotnet.exe</s:String>
 	</wpf:ResourceDictionary>

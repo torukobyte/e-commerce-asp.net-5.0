@@ -3,6 +3,8 @@ using System.Globalization;
 using ETicaret.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,11 @@ namespace ETicaret
 
             services.AddDbContext<ETicaretContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("ETicaretContextSQLite")));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount=true)
+                .AddEntityFrameworkStores<ETicaretContext>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +50,7 @@ namespace ETicaret
                 app.UseHsts();
             }
 
-            CultureInfo customCulture = new CultureInfo("tr-TR");
+            var customCulture = new CultureInfo("tr-TR");
 
             customCulture.NumberFormat.NumberDecimalSeparator = ".";
 
@@ -54,6 +61,7 @@ namespace ETicaret
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>
@@ -61,6 +69,7 @@ namespace ETicaret
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

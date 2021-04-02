@@ -33,7 +33,7 @@ namespace ETicaret.Controllers
             return View(await _context.Urunler.Include(x => x.Resimler).ToListAsync());
         }
 
-        public async Task<IActionResult> KategorininUrunleri(int? id)
+        public async Task<IActionResult> KategorininUrunleri(Guid? id)
         {
             var kategori = await _context.Kategoriler
                 .Include(x => x.KategoriUrunler).ThenInclude(x => x.Urun).ThenInclude(x => x.Resimler)
@@ -48,7 +48,7 @@ namespace ETicaret.Controllers
             return View("index", kategorininUrunleri);
         }
 
-        public async Task<IActionResult> KategorileriniAyarla(int? id)
+        public async Task<IActionResult> KategorileriniAyarla(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -64,7 +64,7 @@ namespace ETicaret.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> KategorileriniAyarla(int? id, IFormCollection elemanlar)
+        public async Task<IActionResult> KategorileriniAyarla(Guid? id, IFormCollection elemanlar)
         {
             var urun = await _context.Urunler
                 .Include(x => x.Kategorileri)
@@ -84,7 +84,7 @@ namespace ETicaret.Controllers
 
         // GET: UrunIslemleri/Details
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -105,7 +105,7 @@ namespace ETicaret.Controllers
         // POST: UrunIslemleri/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int? id, [Bind("Ad,Aciklama,Fiyat,Dosya")] Urun urun)
+        public async Task<IActionResult> Create(Guid? id, [Bind("Ad,Aciklama,Fiyat,Dosya")] Urun urun)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +130,7 @@ namespace ETicaret.Controllers
                 {
                 }
 
-                if (id != null) urun.KategoriUrunler.Add(new KategoriUrun {KategoriId = (int) id});
+                if (id != null) urun.KategoriUrunler.Add(new KategoriUrun {KategoriId = (Guid) id});
                 // if (id != null) urun.Kategorileri.Add(await _context.Kategoriler.FindAsync(id = id));
                 _context.Add(urun);
                 await _context.SaveChangesAsync();
@@ -153,7 +153,7 @@ namespace ETicaret.Controllers
         }
 
         // GET: UrunIslemleri/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -166,7 +166,7 @@ namespace ETicaret.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ad,Aciklama,Fiyat,Dosya")] Urun urun)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Ad,Aciklama,Fiyat,Dosya")] Urun urun)
         {
             if (id != urun.Id) return NotFound();
 
@@ -215,7 +215,7 @@ namespace ETicaret.Controllers
         }
 
         // GET: UrunIslemleri/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null) return NotFound();
 
@@ -234,7 +234,7 @@ namespace ETicaret.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var urun = _context.Urunler.Include(x => x.Resimler).SingleOrDefault(x => x.Id == id);
             _context.Urunler.Remove(urun!);
@@ -266,7 +266,7 @@ namespace ETicaret.Controllers
             return RedirectToAction(nameof(Edit), new {id = resim.UrunuId});
         }
 
-        private bool UrunExists(int id)
+        private bool UrunExists(Guid id)
         {
             return _context.Urunler.Any(e => e.Id == id);
         }

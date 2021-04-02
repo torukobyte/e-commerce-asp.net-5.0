@@ -211,13 +211,21 @@ namespace ETicaret.Data
             context.KategorilerVeUrunler.AddRange(kategorilerVeUrunler);
 
             SHA256 sha = new SHA256CryptoServiceProvider();
+            var salt = "17.3.999+2/5-qxw28012.992";
+            var pwEncrypt =
+                Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("123")));
+            var saltEncrypt = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(salt)));
 
+            var password =
+                Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(pwEncrypt + saltEncrypt)));
+            
+            
             context.Kullanicilar.AddRange(
                 new Kullanici
                 {
                     username = "burak",
-                    password = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("123"))),
-                    cPassword = Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes("123"))),
+                    password = password,
+                    cPassword = password,
                     isAdmin = "admin"
                 }
             );
