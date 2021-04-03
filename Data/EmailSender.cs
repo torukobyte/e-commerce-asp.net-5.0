@@ -21,7 +21,7 @@ namespace ETicaret.Data
             {
                 Host = "smtp.gmail.com",
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("torukobyte.eticaret@gmail.com", "17.3.999+2/5-qxw28012.992"),
+                Credentials = new NetworkCredential("gmail", "password"),
                 Port = 587,
                 EnableSsl = true
             };
