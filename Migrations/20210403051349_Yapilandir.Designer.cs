@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Migrations
 {
     [DbContext(typeof(ETicaretContext))]
-    [Migration("20210402144008_Yapilandir")]
+    [Migration("20210403051349_Yapilandir")]
     partial class Yapilandir
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,22 +74,19 @@ namespace ETicaret.Migrations
 
             modelBuilder.Entity("ETicaret.Models.Resim", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UrunuId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<Guid?>("UrunuId1")
+                    b.Property<string>("DosyaAdi")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("dosyaAdi")
+                    b.Property<Guid>("UrunuId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UrunuId1");
+                    b.HasIndex("UrunuId");
 
                     b.ToTable("Resimler");
                 });
@@ -335,7 +332,9 @@ namespace ETicaret.Migrations
                 {
                     b.HasOne("ETicaret.Models.Urun", "Urunu")
                         .WithMany("Resimler")
-                        .HasForeignKey("UrunuId1");
+                        .HasForeignKey("UrunuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Urunu");
                 });

@@ -221,20 +221,19 @@ namespace ETicaret.Migrations
                 name: "Resimler",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    dosyaAdi = table.Column<string>(type: "TEXT", nullable: true),
-                    UrunuId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UrunuId1 = table.Column<Guid>(type: "TEXT", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    DosyaAdi = table.Column<string>(type: "TEXT", nullable: true),
+                    UrunuId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resimler", x => x.id);
+                    table.PrimaryKey("PK_Resimler", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Resimler_Urunler_UrunuId1",
-                        column: x => x.UrunuId1,
+                        name: "FK_Resimler_Urunler_UrunuId",
+                        column: x => x.UrunuId,
                         principalTable: "Urunler",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,9 +279,9 @@ namespace ETicaret.Migrations
                 column: "KategoriId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Resimler_UrunuId1",
+                name: "IX_Resimler_UrunuId",
                 table: "Resimler",
-                column: "UrunuId1");
+                column: "UrunuId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

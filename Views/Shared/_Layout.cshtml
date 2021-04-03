@@ -3,91 +3,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - ETicaret</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i
-                        class="fas fa-globe-europe"></i> ETicaret</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav">
-                        <partial name="_LoginPartial"/>
-                        @* @if (Context.Session.GetString("username") != null) *@
-                        @* { *@
-                        @*     <li class="nav-item"> *@
-                        @*         <a class="nav-link text-warning" asp-action="Detay" asp-controller="KullaniciIslemleri"><i class="fas fa-user"></i> @Context.Session.GetString("username")</a> *@
-                        @*     </li> *@
-                        @*      *@
-                        @*     <li class="nav-item"> *@
-                        @*         <a class="nav-link text-light" asp-action="Cikis" asp-controller="KullaniciIslemleri"><i class="fas fa-sign-out-alt"></i> Çıkış</a> *@
-                        @*     </li> *@
-                        @* } *@
-                        @* else *@
-                        @* { *@
-                        @*     <li class="nav-item"> *@
-                        @*         <a class="nav-link text-light" asp-action="Giris" asp-controller="KullaniciIslemleri"><i class="fas fa-sign-in-alt"></i> Giriş</a> *@
-                        @*     </li> *@
-                        @*     <li class="nav-item"> *@
-                        @*         <a class="nav-link text-light"  asp-action="Kayit" asp-controller="KullaniciIslemleri"><i class="fas fa-user"></i> Kayıt</a> *@
-                        @*     </li> *@
-                        @* } *@
-                    </ul>
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (Context.Session.GetString("isAdmin") == "admin" || Context.Session.GetString("Turu") == "User")
-                        {
-                            <form class="form-inline ml-3">
-                                <a class="btn btn-outline-info btn-sm" asp-area="" asp-controller="KategoriIslemleri"
-                                    asp-action="Index"><i class="fas fa-sitemap" style="width: 30px;"></i>Kategori
-                                    Yönetimi</a>
-
-                                <a class="btn btn-outline-primary btn-sm ml-3" asp-area="" asp-controller="UrunIslemleri"
-                                    asp-action="Index"><i class="fas fa-barcode" style="width: 30px;"></i>Ürün Yönetimi</a>
-                            </form>
-                        }
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-
-            @if (@TempData["mesaj"] != null)
-            {
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    @TempData["mesaj"]
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            }
-
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
-            <a href="www.youtube.com/brabbitkun">torukobyte</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <i
+                    class="fas fa-globe-europe">
+                </i> ETicaret
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav">
+                    <partial name="_LoginPartial"/>
+                    @* @if (Context.Session.GetString("username") != null) *@
+                    @* { *@
+                    @*     <li class="nav-item"> *@
+                    @*         <a class="nav-link text-warning" asp-action="Detay" asp-controller="KullaniciIslemleri"><i class="fas fa-user"></i> @Context.Session.GetString("username")</a> *@
+                    @*     </li> *@
+                    @*      *@
+                    @*     <li class="nav-item"> *@
+                    @*         <a class="nav-link text-light" asp-action="Cikis" asp-controller="KullaniciIslemleri"><i class="fas fa-sign-out-alt"></i> Çıkış</a> *@
+                    @*     </li> *@
+                    @* } *@
+                    @* else *@
+                    @* { *@
+                    @*     <li class="nav-item"> *@
+                    @*         <a class="nav-link text-light" asp-action="Giris" asp-controller="KullaniciIslemleri"><i class="fas fa-sign-in-alt"></i> Giriş</a> *@
+                    @*     </li> *@
+                    @*     <li class="nav-item"> *@
+                    @*         <a class="nav-link text-light"  asp-action="Kayit" asp-controller="KullaniciIslemleri"><i class="fas fa-user"></i> Kayıt</a> *@
+                    @*     </li> *@
+                    @* } *@
+                </ul>
+                <ul class="navbar-nav flex-grow-1">
+                    <form class="form-inline ml-3">
+                        <a class="btn btn-outline-success btn-sm" asp-area="" asp-controller="KategoriIslemleri"
+                           asp-action="Index">
+                            <i class="fas fa-sitemap" style="width: 30px;"></i>Kategori
+                            Yönetimi
+                        </a>
+
+                        <a class="btn btn-outline-primary btn-sm ml-3" asp-area="" asp-controller="UrunIslemleri"
+                           asp-action="Index">
+                            <i class="fas fa-barcode" style="width: 30px;"></i>Ürün Yönetimi
+                        </a>
+                    </form>
+                </ul>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/99077ca7e0.js" crossorigin="anonymous"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+
+        @if (@TempData["mesaj"] != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                @TempData["mesaj"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        <a href="www.youtube.com/brabbitkun">torukobyte</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/99077ca7e0.js" crossorigin="anonymous"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

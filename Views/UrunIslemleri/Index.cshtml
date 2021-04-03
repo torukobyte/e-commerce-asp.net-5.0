@@ -70,10 +70,10 @@
     {
         <tr>
             <td>
-                @if (item.Resimler.FirstOrDefault()?.dosyaAdi != null)
+                @if (item.Resimler.FirstOrDefault()?.DosyaAdi != null)
                 {
                     <div class="zoom">
-                        <img src="\resimler\@item.Resimler.FirstOrDefault()?.dosyaAdi" style="max-height: 100px;max-width: 90px;border: 1px solid black;padding-bottom: 0;"/>
+                        <img src="\resimler\@item.Resimler.FirstOrDefault()?.DosyaAdi" style="max-height: 100px;max-width: 90px;border: 1px solid black;padding-bottom: 0;"/>
                     </div>
                     <br/>
                 }
@@ -110,16 +110,13 @@
                     </svg>
                     Detay
                 </a> |
-                @if (Context.Session.GetString("isAdmin") == "admin")
-                {
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                        </svg>
-                        Sil
-                    </a>
-                    <span>|</span>
-                }
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                    </svg>
+                    Sil
+                </a>
+                <span>|</span>
                 <a class="btn btn-success" asp-action="KategorileriniAyarla" asp-route-id="@item.Id">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-border-width" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-2zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>

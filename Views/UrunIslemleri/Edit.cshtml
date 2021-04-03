@@ -43,11 +43,11 @@
 <div class="row">
     @foreach (var item in Model.Resimler)
     {
-        @if (item.dosyaAdi != null)
+        @if (item.DosyaAdi != null)
         {
             <span>
-                <img src="\resimler\@item.dosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/><br>
-                <a asp-action="ResimSil" asp-route-id="@item.id" class="btn btn-danger" style="display:block;width: 100%;border:1px solid black;">Sil</a>
+                <img src="\resimler\@item.DosyaAdi" style="height: 150px;border-style:solid;border-radius:5px;" class="m-1"/><br>
+                <a asp-action="ResimSil" asp-route-id="@item.Id" class="btn btn-danger" style="display:block;width: 100%;border:1px solid black;">Sil</a>
             </span>
         }
 

@@ -21,7 +21,7 @@ namespace ETicaret.Data
             {
                 Host = "smtp.gmail.com",
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("gmail", "password"),
+                Credentials = new NetworkCredential("youremail@gmail.com", "yourpassword"),
                 Port = 587,
                 EnableSsl = true
             };

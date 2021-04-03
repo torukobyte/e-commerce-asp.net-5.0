@@ -115,30 +115,24 @@ namespace ETicaret.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id, IFormCollection elemanlar)
         {
-            if (HttpContext.Session.GetString("isAdmin") == "admin")
-            {
-                var kategori = await _context.Kategoriler
-                    .Include(x => x.Urunleri)
-                    .Include(x => x.KategoriUrunler)
-                    .FirstOrDefaultAsync(m => m.Id == id);
+            var kategori = await _context.Kategoriler
+                .Include(x => x.Urunleri)
+                .Include(x => x.KategoriUrunler)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-                var urunlerSilinsin = elemanlar["deleteItems"] == "on";
+            var urunlerSilinsin = elemanlar["deleteItems"] == "on";
 
-                if (urunlerSilinsin) _context.RemoveRange(kategori.Urunleri);
+            if (urunlerSilinsin) _context.RemoveRange(kategori.Urunleri);
 
-                _context.RemoveRange(kategori.KategoriUrunler);
+            _context.RemoveRange(kategori.KategoriUrunler);
 
-                _context.Kategoriler.Remove(kategori);
-                await _context.SaveChangesAsync();
+            _context.Kategoriler.Remove(kategori);
+            await _context.SaveChangesAsync();
 
-                var urunMesaj = urunlerSilinsin ? "ve içerisindeki " + kategori.Urunleri.Count + " adet ürün " : "";
+            var urunMesaj = urunlerSilinsin ? "ve içerisindeki " + kategori.Urunleri.Count + " adet ürün " : "";
 
-                TempData["Mesaj"] = $"{kategori.Adi} kategorisi {urunMesaj} başarıyla silindi!";
-                return RedirectToAction(nameof(Index));
-            }
-
-            TempData["Mesaj"] = "Erişim reddedildi!";
-            return RedirectToAction("Index", "Home");
+            TempData["Mesaj"] = $"{kategori.Adi} kategorisi {urunMesaj} başarıyla silindi!";
+            return RedirectToAction(nameof(Index));
         }
 
         private bool KategoriExists(Guid id)

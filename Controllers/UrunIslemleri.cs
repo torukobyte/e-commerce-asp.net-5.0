@@ -73,7 +73,7 @@ namespace ETicaret.Controllers
 
             urun.Kategorileri.Clear();
             foreach (var i in elemanlar["SeciliCheckBoxlar"])
-                urun.Kategorileri.Add(await _context.Kategoriler.FindAsync(int.Parse(i)));
+                urun.Kategorileri.Add(await _context.Kategoriler.FindAsync(Guid.Parse(i)));
 
             await _context.SaveChangesAsync();
 
@@ -123,7 +123,7 @@ namespace ETicaret.Controllers
                             await item.CopyToAsync(dosyaAkisi);
                         }
 
-                        urun.Resimler.Add(new Resim {dosyaAdi = fileName});
+                        urun.Resimler.Add(new Resim {DosyaAdi = fileName});
                     }
                 }
                 catch (NullReferenceException)
@@ -190,7 +190,7 @@ namespace ETicaret.Controllers
                             await item.CopyToAsync(dosyaAkisi);
                         }
 
-                        urun.Resimler.Add(new Resim {dosyaAdi = fileName});
+                        urun.Resimler.Add(new Resim {DosyaAdi = fileName});
                     }
                 }
                 catch (NullReferenceException)
@@ -244,7 +244,7 @@ namespace ETicaret.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-                foreach (var item in urun.Resimler) System.IO.File.Delete(Path.Combine(_dosyaYolu, item.dosyaAdi));
+                foreach (var item in urun.Resimler) System.IO.File.Delete(Path.Combine(_dosyaYolu, item.DosyaAdi));
 
                 TempData["mesaj"] = urun.Ad + " ürünü Başarıyla Silindi!";
                 return RedirectToAction(nameof(Index));
@@ -256,12 +256,12 @@ namespace ETicaret.Controllers
             }
         }
 
-        public async Task<IActionResult> ResimSil(int id)
+        public async Task<IActionResult> ResimSil(Guid id)
         {
             var resim = await _context.Resimler.FindAsync(id);
             _context.Resimler.Remove(resim);
             await _context.SaveChangesAsync();
-            System.IO.File.Delete(Path.Combine(_dosyaYolu, resim.dosyaAdi));
+            System.IO.File.Delete(Path.Combine(_dosyaYolu, resim.DosyaAdi));
 
             return RedirectToAction(nameof(Edit), new {id = resim.UrunuId});
         }
