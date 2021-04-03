@@ -11,7 +11,7 @@ namespace ETicaret.Data
         {
             MailMessage mail = new MailMessage
             {
-                From = new MailAddress("torukobyte.eticaret@gmail.com","Yönetim",System.Text.Encoding.UTF8),
+                From = new MailAddress("youremail@gmail.com","Yönetim",System.Text.Encoding.UTF8),
                 Subject = subject,
                 Body = htmlMessage,
                 IsBodyHtml = true
